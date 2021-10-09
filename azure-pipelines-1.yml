@@ -10,8 +10,20 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-- name: one
-  value: initialValue 
+ - name: one
+   value: initialValue 
+ Branchs:
+    -gitBranch: DEV 
+     ivyBranch: BRC_S_ALELO_ACQ
+    -gitBranch: HML 
+     ivyBranch: BRC_S_ALELO_ACQ_HML
+    -gitBranch: PROD 
+     ivyBranch: BRC_S_ALELO_ACQ_PROD
+    -gitBranch: PrePRD 
+     ivyBranch: BRC_S_ALELO_ACQ_PrePRD
+    -gitBranch: FIX 
+     ivyBranch: BRC_S_ALELO_ACQ_FIX
+  CURRENT_BRANCH: Undefined
 
 steps:
   - script: |
@@ -27,3 +39,6 @@ steps:
       echo $(Build.SourceBranchName)
       echo $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
     displayName: Second variable pass
+  -${{ each value in variables.Branchs }}:
+    - script: echo ${{ value.icyBranch }}  
+    displayName: Test Dictionaries
