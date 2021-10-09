@@ -12,8 +12,6 @@ pool:
 variables:
 - name: one
   value: initialValue 
-- name: isMain
-  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
 steps:
   - script: |
@@ -25,6 +23,7 @@ steps:
   - script: |
       echo ${{ variables.one }} # outputs initialValue
       echo $(one) # outputs secondValue
-      echo ${{ variables.isMain}}
+      echo $(Build.SourceBranch)
+      echo $(Build.SourceBranchName)
       echo $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
     displayName: Second variable pass
