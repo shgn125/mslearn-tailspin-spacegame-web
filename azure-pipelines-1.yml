@@ -9,8 +9,12 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  Branchs:
+parameters:
+- name: branchs
+  displayName: Branch_Ivi
+  type: object
+  default: 
+   branchs:
     - gitBranch: DEV 
       ivyBranch: BRC_S_ALELO_ACQ
     - gitBranch: HML 
@@ -20,10 +24,9 @@ variables:
     - gitBranch: PrePRD 
       ivyBranch: BRC_S_ALELO_ACQ_PrePRD
     - gitBranch: FIX 
-      ivyBranch: BRC_S_ALELO_ACQ_FIX
+      ivyBranch: BRC_S_ALELO_ACQ_FIX 
   
-
 steps:    
-  - ${{ each value in variables.Branchs }}:
+  - ${{ each value in parameters.Branchs }}:
     - script: echo ${{ value.icyBranch }}  
       displayName: Test Dictionaries
