@@ -26,4 +26,5 @@ steps:
       echo ${{ variables.one }} # outputs initialValue
       echo $(one) # outputs secondValue
       echo ${{ variables.isMain}}
+      echo $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
     displayName: Second variable pass
