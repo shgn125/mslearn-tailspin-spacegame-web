@@ -27,6 +27,6 @@ parameters:
       ivyBranch: BRC_S_ALELO_ACQ_FIX 
   
 steps:    
-  - ${{ each value in parameters.Branchs }}:
-    - script: echo ${{ value.icyBranch }}  
+  - ${{ each value in parameters.branchs.branchs }}:
+    - script: echo ${{value.ivBranch}}  
       displayName: Test Dictionaries
