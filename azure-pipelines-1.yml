@@ -32,5 +32,5 @@ steps:
   - ${{ each value in parameters.branchs.branchs }}:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
-  - script: echo $(variables.CurrentBranch) 
+  - script: echo $(CurrentBranch) 
   
