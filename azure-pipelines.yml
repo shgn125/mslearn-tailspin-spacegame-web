@@ -1,17 +1,37 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 
+parameters:
+- name: branchs
+  displayName: Branch_Ivi
+  type: object
+  default: 
+   branchs:
+    - gitBranch: DEV 
+      ivyBranch: BRC_S_ALELO_ACQ
+    - gitBranch: HML 
+      ivyBranch: BRC_S_ALELO_ACQ_HML
+    - gitBranch: PROD 
+      ivyBranch: BRC_S_ALELO_ACQ_PROD
+    - gitBranch: PrePRD 
+      ivyBranch: BRC_S_ALELO_ACQ_PrePRD
+    - gitBranch: FIX 
+      ivyBranch: BRC_S_ALELO_ACQ_FIX 
 variables:
-  buildConfiguration: 'Release'
-
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+  name: CurrentBranch
+  value: Undefined
+steps:    
+  - ${{ each value in parameters.branchs.branchs }}:
+    - ${{ if eq( value.ivyBranch, 'DEV') }}:
+      - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
+  - script: echo $(variables.CurrentBranch) 
+  
+  
