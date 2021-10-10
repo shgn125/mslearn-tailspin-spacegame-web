@@ -27,10 +27,10 @@ parameters:
       ivyBranch: BRC_S_ALELO_ACQ_FIX 
 variables:
   name: CurrentBranch
-  value: Undefined
+  value: Pollito
 steps:    
   - ${{ each value in parameters.branchs.branchs }}:
-    - ${{ if eq( value.ivyBranch, 'DEV') }}:
+    - ${{ if eq( value.gitBranch, 'DEV') }}:
       - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
   - script: echo $(variables.CurrentBranch) 
   
