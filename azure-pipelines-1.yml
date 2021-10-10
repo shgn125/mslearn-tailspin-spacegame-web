@@ -28,14 +28,20 @@ parameters:
 variables:
   name: CurrentBranch
   value: Pollito
-steps:    
-#  - ${{ if eq( variables.CurrentBranch, 'Pollito') }}:
-  - script: |
-      echo $(CurrentBranch)
-      exit 1
+steps: 
+  - ${{ if eq(variables['CurrentBranch'], 'refs/heads/main') }}: 
+    - script: echo I run only if Build.SourceBranch = refs/heads/main    
+ # - ${{ if eq( $( CurrentBranch ), 'Pollito') }}:
+  #  - script: |
+  #      echo $(CurrentBranch)
+  #      exit 1
   - ${{ each value in parameters.branch_Ivi.branchs }}:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
-  
+  - ${{ if eq(variables['CurrentBranch'], 'Pollito') }}: 
+    - script: |
+        echo I run only if Build.SourceBranch = refs/heads/main
+        exit 1
 
   
+
