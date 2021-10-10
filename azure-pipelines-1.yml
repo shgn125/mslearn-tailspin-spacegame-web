@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 parameters:
-- name: branchs
+- name: branch_Ivi
   displayName: Branch_Ivi
   type: object
   default: 
@@ -29,8 +29,11 @@ variables:
   name: CurrentBranch
   value: Pollito
 steps:    
-  - ${{ each value in parameters.branchs.branchs }}:
+  - ${{ if eq( variables.CurrentBranch, 'Pollito') }}:
+      - script: |
+              echo $(CurrentBranch)
+              exit 1
+  - ${{ each value in parameters.branch_Ivi.branchs }}:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
-  - script: echo $(CurrentBranch) 
   
