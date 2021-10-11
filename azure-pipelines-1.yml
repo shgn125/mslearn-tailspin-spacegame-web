@@ -38,7 +38,7 @@ steps:
   - ${{ each value in parameters.branch_Ivi.branchs }}:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
-  - ${{ if eq(variables.CurrentBranch, Pollito) }}: 
+  - ${{ if eq(variables.CurrentBranch, BRC_S_ALELO_ACQ) }}: 
       - script: |
           echo I run only if Build.SourceBranch = refs/heads/main
           exit 1
