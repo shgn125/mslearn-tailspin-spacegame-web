@@ -37,8 +37,9 @@ steps:
   #      exit 1
   - ${{ each value in parameters.branch_Ivi.branchs }}:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
-      - powershell:
+      - powershell: |
           Write-Host ##vso[task.setvariable variable=CurrentBranch;isOutput=true]${{value.ivyBranch}}
+          Write-Host ${{value.ivyBranch}}
 #      - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
 #  - ${{ if eq(variables.CurrentBranch, 'BRC_S_ALELO_ACQ') }}: 
 #      - script: |
