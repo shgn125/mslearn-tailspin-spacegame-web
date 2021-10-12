@@ -29,7 +29,7 @@ variables:
   name: Current.Branch
   value: Pollito
 steps: 
-  - ${{ if eq(variables['CurrentBranch'], 'refs/heads/main') }}: 
+  - ${{ if eq(variables['Current_Branch'], 'refs/heads/main') }}: 
     - script: echo I run only if Build.SourceBranch = refs/heads/main    
  # - ${{ if eq( $( CurrentBranch ), 'Pollito') }}:
   #  - script: |
