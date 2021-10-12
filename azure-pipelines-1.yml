@@ -31,8 +31,6 @@ variables:
 steps: 
   - ${{ if eq(variables['Current_Branch'], 'refs/heads/main') }}: 
     - script: echo I run only if Build.SourceBranch = refs/heads/main    
-  - powershell:           
-      Write-Host "${$env:BRANCH}"
  # - ${{ if eq( $( CurrentBranch ), 'Pollito') }}:
   #  - script: |
   #      echo $(CurrentBranch)
@@ -49,4 +47,6 @@ steps:
 #      - script: |
 #          echo I run only if Build.SourceBranch = refs/heads/main
 #          exit 1
+  - powershell:           
+      Write-Host "$($env:CURRENTBRANCH)"
 
