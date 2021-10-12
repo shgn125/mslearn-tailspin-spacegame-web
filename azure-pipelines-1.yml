@@ -39,7 +39,7 @@ steps:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - powershell: |
           Write-Host ##vso[task.setvariable variable=CurrentBranch;isOutput=true]${{value.ivyBranch}}          
-          Write-Host "$env:CURRENTBRANCH"
+          Write-Host $(CurrentBranch)
           Write-Host ${{value.ivyBranch}}
           Write-Host $env:Build_SourceBranchName
         name: setBranch
@@ -51,5 +51,5 @@ steps:
   - script: echo $(setBranch.CurrentBranch)
   - powershell: |          
       Write-Host "$($env:CURRENTBRANCH)"
-      Write-Host "$($env:SETBRANCH_CURRENTBRANCH)"
+      Write-Host $(setBranch.CurrentBranch)
 
