@@ -26,11 +26,13 @@ parameters:
     - gitBranch: FIX 
       ivyBranch: BRC_S_ALELO_ACQ_FIX 
 variables:
-  name: Current.Branch
-  value: Pollito
+  CurrentBranch: Pollito
+  BRANCH: SinBranch
 steps: 
   - ${{ if eq(variables['Current_Branch'], 'refs/heads/main') }}: 
     - script: echo I run only if Build.SourceBranch = refs/heads/main    
+  - powershell:           
+      Write-Host "${$env:BRANCH}"
  # - ${{ if eq( $( CurrentBranch ), 'Pollito') }}:
   #  - script: |
   #      echo $(CurrentBranch)
@@ -39,7 +41,7 @@ steps:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - powershell: |
           Write-Host ##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}          
-          Write-Host "$env:CURRENT_BRANCH"
+          Write-Host "$env:CURRENTBRANCH"
           Write-Host ${{value.ivyBranch}}
           Write-Host $env:Build_SourceBranchName
 #      - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
@@ -47,5 +49,4 @@ steps:
 #      - script: |
 #          echo I run only if Build.SourceBranch = refs/heads/main
 #          exit 1
-  - powershell:           
-      Write-Host "$($env:CURRENT_BRANCH)"
+
