@@ -39,7 +39,7 @@ steps:
     - ${{ if eq( value.gitBranch, 'DEV') }}:
       - powershell: |
           Write-Host ##vso[task.setvariable variable=CurrentBranch;isOutput=true]${{value.ivyBranch}}          
-          Write-Host $env:CURRENT_BRANCH
+          Write-Host "$env:CURRENT_BRANCH"
           Write-Host ${{value.ivyBranch}}
           Write-Host $env:Build_SourceBranchName
 #      - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
@@ -48,4 +48,4 @@ steps:
 #          echo I run only if Build.SourceBranch = refs/heads/main
 #          exit 1
   - powershell:           
-      Write-Host $env:CURRENT_BRANCH
+      Write-Host "$($env:CURRENT_BRANCH)"
