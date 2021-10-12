@@ -42,12 +42,14 @@ steps:
           Write-Host "$env:CURRENTBRANCH"
           Write-Host ${{value.ivyBranch}}
           Write-Host $env:Build_SourceBranchName
+        name: setBranch
 #      - bash: echo '##vso[task.setvariable variable=CurrentBranch]${{value.ivyBranch}}'
 #  - ${{ if eq(variables.CurrentBranch, 'BRC_S_ALELO_ACQ') }}: 
 #      - script: |
 #          echo I run only if Build.SourceBranch = refs/heads/main
 #          exit 1
+  - script: echo $(setBranch.CurrentBranch)
   - powershell: |          
       Write-Host "$($env:CURRENTBRANCH)"
-      Write-Host "$[$env:CURRENTBRANCH]"
+      Write-Host "$($env:SETBRANCH_CURRENTBRANCH)"
 
