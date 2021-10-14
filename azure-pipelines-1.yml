@@ -50,6 +50,6 @@ steps:
 #          exit 1
   - script: echo $(setBranch.CurrentBranch)
   - powershell: |          
-      Write-Host "$($env:CURRENTBRANCH)"
-      Write-Host $(setBranch.CurrentBranch)
+      Write-Host parameters.branch_Ivi.branchs
+      Write-Host ${{parameters.branch_Ivi.branchs}}
 
