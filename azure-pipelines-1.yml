@@ -49,7 +49,6 @@ steps:
 #          echo I run only if Build.SourceBranch = refs/heads/main
 #          exit 1
   - script: echo $(setBranch.CurrentBranch)
-  - powershell: |          
-      Write-Host parameters.branch_Ivi.branchs
-      Write-Host ${{parameters.branch_Ivi.branchs}}
+  - powershell: |  
+       ${{ parameters.branch_Ivi.branchs}} | ForEach-Object { Write-Host $_.ivyBranch }
 
